@@ -16,6 +16,7 @@ class Post(models.Model):
     description = models.TextField(blank=True,null=True,verbose_name='Описание')
     tags = models.ManyToManyField('Tag',blank=True,verbose_name='Теги')
     text = models.TextField(verbose_name='Содержание')
+    url = models.CharField(max_length=200,verbose_name="Адрес")
     created_date = models.DateTimeField(
             default=timezone.now,verbose_name='Дата создания')
     published_date = models.DateTimeField(
