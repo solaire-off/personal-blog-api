@@ -1,6 +1,6 @@
 #from django.shortcuts import render
 from .models import Post, Tag
-from rest_framework import viewsets,generics
+from rest_framework import viewsets,generics, permissions
 from .serializers import PostSerializer, TagSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -9,6 +9,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     queryset = Post.objects.all().order_by('-published_date')
     serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class TagViewSet(viewsets.ModelViewSet):
@@ -17,3 +18,4 @@ class TagViewSet(viewsets.ModelViewSet):
     """
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
