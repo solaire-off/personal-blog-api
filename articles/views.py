@@ -1,3 +1,19 @@
-from django.shortcuts import render
+#from django.shortcuts import render
+from .models import Post, Tag
+from rest_framework import viewsets,generics
+from .serializers import PostSerializer, TagSerializer
 
-# Create your views here.
+class PostViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows posts to be viewed or edited.
+    """
+    queryset = Post.objects.all().order_by('-published_date')
+    serializer_class = PostSerializer
+
+
+class TagViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows tagss to be viewed or edited.
+    """
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
